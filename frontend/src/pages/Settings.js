@@ -12,6 +12,7 @@ const Settings = () => {
     },
     theme: "light"
   });
+  const [saveStatus, setSaveStatus] = useState(null);
 
   const handleInputChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -36,7 +37,18 @@ const Settings = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     // In a real app, we would save settings to backend here
-    alert("Settings saved successfully!");
+    setSaveStatus("success");
+    setTimeout(() => setSaveStatus(null), 3000);
+  };
+
+  // Theme handling in a real app would involve CSS or a theme context
+  const applyTheme = (theme) => {
+    // This is a simplified version - in a real app, we would use Context or CSS variables
+    if (theme === "dark") {
+      document.body.classList.add("dark-theme");
+    } else {
+      document.body.classList.remove("dark-theme");
+    }
   };
 
   return (
@@ -137,7 +149,10 @@ const Settings = () => {
               id="theme"
               name="theme"
               value={settings.theme}
-              onChange={handleInputChange}
+              onChange={(e) => {
+                handleInputChange(e);
+                applyTheme(e.target.value);
+              }}
             >
               <option value="light">Light</option>
               <option value="dark">Dark</option>
@@ -151,6 +166,18 @@ const Settings = () => {
             <FiSave className="inline mr-2" />
             Save Settings
           </button>
+          
+          {saveStatus === "success" && (
+            <div className="mt-3 p-2 bg-green-100 text-green-700 rounded">
+              Settings saved successfully!
+            </div>
+          )}
+          
+          {saveStatus === "error" && (
+            <div className="mt-3 p-2 bg-red-100 text-red-700 rounded">
+              Error saving settings. Please try again.
+            </div>
+          )}
         </div>
       </form>
     </div>
