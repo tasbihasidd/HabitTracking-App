@@ -71,6 +71,7 @@ const Settings = () => {
               name="username"
               value={settings.username}
               onChange={handleInputChange}
+              placeholder="Your username"
             />
           </div>
           
@@ -83,6 +84,7 @@ const Settings = () => {
               name="email"
               value={settings.email}
               onChange={handleInputChange}
+              placeholder="Your email address"
             />
           </div>
         </section>

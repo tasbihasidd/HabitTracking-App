@@ -22,9 +22,15 @@ const Sidebar = ({ categoryIcons }) => {
     setIsOpen(!isOpen);
   };
 
+  const closeSidebar = () => {
+    if (isMobile) {
+      setIsOpen(false);
+    }
+  };
+
   return (
     <>
-      <aside className={`sidebar ${isOpen ? 'open' : ''}`}>
+      <aside className={`sidebar ${isOpen ? 'open' : ''}`} style={isMobile && isOpen ? {transform: 'translateX(0)'} : {}}>
         <div className="sidebar-header">
           <div className="logo">
             <span>🌱 HabitGrow</span>
@@ -34,7 +40,7 @@ const Sidebar = ({ categoryIcons }) => {
           <NavLink 
             to="/" 
             className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}
-            onClick={() => isMobile && setIsOpen(false)}
+            onClick={closeSidebar}
           >
             <FiHome className="icon" />
             <span>Dashboard</span>
@@ -42,7 +48,7 @@ const Sidebar = ({ categoryIcons }) => {
           <NavLink 
             to="/goals" 
             className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}
-            onClick={() => isMobile && setIsOpen(false)}
+            onClick={closeSidebar}
           >
             <FiTrendingUp className="icon" />
             <span>Goals</span>
@@ -50,7 +56,7 @@ const Sidebar = ({ categoryIcons }) => {
           <NavLink 
             to="/achievements" 
             className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}
-            onClick={() => isMobile && setIsOpen(false)}
+            onClick={closeSidebar}
           >
             <FiAward className="icon" />
             <span>Achievements</span>
@@ -58,7 +64,7 @@ const Sidebar = ({ categoryIcons }) => {
           <NavLink 
             to="/settings" 
             className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}
-            onClick={() => isMobile && setIsOpen(false)}
+            onClick={closeSidebar}
           >
             <FiSettings className="icon" />
             <span>Settings</span>
